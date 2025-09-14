@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36429.23 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AICalendar.Api", "AICalendar.Api\AICalendar.Api.csproj", "{040D4A30-C80F-48CA-AEFB-D598EA985FC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AICalendar.Domain", "AICalendar.Domain\AICalendar.Domain.csproj", "{89F88068-DAAD-41F5-BDE8-E35657E77CBC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AICalendar.Data", "AICalendar.Data\AICalendar.Data.csproj", "{1BC935CD-1BCB-4AD1-981E-1DD6C1368F5F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{040D4A30-C80F-48CA-AEFB-D598EA985FC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{040D4A30-C80F-48CA-AEFB-D598EA985FC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{040D4A30-C80F-48CA-AEFB-D598EA985FC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{040D4A30-C80F-48CA-AEFB-D598EA985FC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89F88068-DAAD-41F5-BDE8-E35657E77CBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89F88068-DAAD-41F5-BDE8-E35657E77CBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89F88068-DAAD-41F5-BDE8-E35657E77CBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89F88068-DAAD-41F5-BDE8-E35657E77CBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BC935CD-1BCB-4AD1-981E-1DD6C1368F5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BC935CD-1BCB-4AD1-981E-1DD6C1368F5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BC935CD-1BCB-4AD1-981E-1DD6C1368F5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BC935CD-1BCB-4AD1-981E-1DD6C1368F5F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C77D9A8E-BDE9-484C-ACFD-1130D1698000}
+	EndGlobalSection
+EndGlobal
