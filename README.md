@@ -128,21 +128,140 @@ Other styles like GraphQL or gRPC could be adopted later for specific features i
 
 ---
 
-### What’s Next for Homework 2
+## Homework 2: Step 2 — Define the Contract (Schema/Spec)
 
-- Define the API contract using OpenAPI 3.1, with endpoints like `/calendars`, `/events`, and `/attendees`.
-- Use query parameters for date/time filters, time zones, pagination, and other operations.
-- Store the final contract file in a `/contracts` folder in this repository.
+### Overview
 
----
+Step 2 focuses on authoring the correct API contract for the chosen style in Step 1. For this AI Calendar project, the REST API style with **OpenAPI 3.1** was selected. This step involves formally specifying all API endpoints, query parameters, request and response schemas, and documenting versioning and breaking change policies.
 
-*This “Day 2” section will be updated further as Homework 2 progresses, including example API calls, versioning policies, migration notes, security and observability details.*
+The contract serves as the **authoritative source of truth** guiding development, testing, and client integration.
 
 ---
 
-**End of Homework 2 Step 1 Documentation**
+### Detailed Work Completed
+
+#### 1. OpenAPI Contract File Created
+- Stored at `/contracts/openapi.yaml` in root solution folder, separate from implementation.
+- Version: 3.1.0 with semantic versioning explained in the header.
+
+#### 2. Defined RESTful Endpoints
+- **/calendars**  
+  Supports `GET` for list, `POST` for creation, `PUT` for update, and `DELETE` for removal.  
+  Example:  
+  - `GET /api/calendars` returns array of Calendar objects.  
+  - `POST /api/calendars` expects JSON Calendar object in body.
+
+- **/events**  
+  Includes `GET` with query parameters and full CRUD:  
+  - Query parameters allow filtering events by `calendarId`, date `start` and `end` ranges (ISO 8601), and `timeZone`.  
+  - `POST`, `PUT`, and `DELETE` support event management.
+
+- **/attendees**  
+  Includes full CRUD (get list, get by id, create, update, delete).
+
+#### 3. Query Parameters for Events
+- `/events?calendarId=id&start=YYYY-MM-DDTHH:mm:ssZ&end=YYYY-MM-DDTHH:mm:ssZ&timeZone=Zone`  
+Allows clients to efficiently fetch events for specific calendars and time ranges considering time zones.
+
+#### 4. Rich Schema Definitions
+- **Calendar:** id, name, owner  
+- **Event:** id, title, start & end datetime, timeZone, attendees array, recurrenceRule, reminders array, invitations array, notes  
+- **Attendee:** id, name, email  
+- **RecurrenceRule, Reminder, Invitation:** detailed nested schemas to support complex event recurrence, notification reminders, and invitations.
+
+#### 5. Versioning & Breaking Change Policy Documented
+- Contract header includes semantic versioning strategy:  
+  - Backward-compatible changes increment minor version.  
+  - Breaking changes increment major version and are documented in the contract header and through supplementary changelogs.  
+- Policy gives clear guidance for clients and developers to manage API evolution and migration.
 
 ---
 
-*For more information, see the commit history and related files in this master branch.*
+### API Testing Examples
+
+#### Calendars
+
+- **Create Calendar (POST /api/calendars)**  
+  Request Body:
+  {
+   "id": "cal1",
+   "name": "Work Calendar",
+  "owner": "alice@example.com"
+   }
+
+  Expected Response: `201 Created` with the created calendar resource.
+
+- **Get All Calendars (GET /api/calendars)**  
+Response: HTTP status 200 with array of calendar objects.
+
+- **Get Calendar by ID (GET /api/calendars/cal1)**  
+Response: HTTP 200 with calendar JSON or 404 if not found.
+
+- **Update Calendar (PUT /api/calendars/cal1)**  
+Request Body:
+  {
+"id": "cal1",
+"name": "Updated Work Calendar",
+"owner": "alice@example.com"
+}
+Expected Response: HTTP 204 No Content on success.
+
+- **Delete Calendar (DELETE /api/calendars/cal1)**  
+Expected Response: HTTP 204 No Content on success.
+
+---
+
+#### Events
+
+- **Create Event (POST /api/events)**  
+Request Body:
+{
+"id": "evt1",
+"title": "Team Meeting",
+"start": "2025-09-20T10:00:00Z",
+"end": "2025-09-20T11:00:00Z",
+"timeZone": "UTC",
+"attendees": [{"id":"att1","name":"Bob","email":"bob@example.com"}],
+"recurrenceRule": {"frequency":"Weekly","interval":1},
+"reminders": [{"id":"rem1","leadTime":"00:15:00","method":"Email"}],
+"invitations": [{"id":"inv1","invitationStatus":"Pending","invitee":{"id":"att1"}}],
+"notes": "Discuss Q3 goals"
+}
+Expected Response: `201 Created`.
+
+- **List Events with Filters (GET /api/events?calendarId=cal1&start=2025-09-01T00:00:00Z&end=2025-09-30T23:59:59Z&timeZone=UTC)**  
+Returns events within specified range for calendar `cal1`.
+
+---
+
+#### Attendees
+
+- **Create Attendee (POST /api/attendees)**  
+Request Body:
+{
+"id": "att1",
+"name": "Bob",
+"email": "bob@example.com"
+}
+Expected Response: `201 Created`.
+
+- **List Attendees (GET /api/attendees)**  
+Returns array of attendees.
+
+---
+
+### Summary
+
+- The OpenAPI contract fully defines the REST API with clear paths, parameters, and schemas.
+- Querying capabilities for events by time ranges and time zones support client requirements.
+- The contract includes a **Versioning and Breaking Changes policy**, guiding future evolution.
+- This contract serves as the basis for testing and implementation, successfully validated with Swagger UI.
+- Work completed fully meets the acceptance criteria for Homework 2 Step 2.
+
+---
+
+This completes Step 2: Define the Contract, establishing a solid foundation for API development and usage.
+
+
+
 
